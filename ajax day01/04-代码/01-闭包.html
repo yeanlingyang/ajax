@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+
+  // 闭包: 一个函数的内部嵌套另一个函数, 内部函数引用了外部函数的局部变量, 就形成了闭包
+  // 闭包内存问题: 闭包的内存一般是不会自动释放   (只要外部有着对于闭包内的引用)
+  // 闭包的作用: 实现变量私有化, 可以保护变量!!!
+
+
+  // function outer() {
+  //   // 实现计数器
+  //   var count = 0;  // 局部变量
+
+  //   function inner() {
+  //     count++;
+  //     console.log('执行了' + count + '次');
+  //   }
+  //   return inner;
+  // }
+  // var result = outer();
+  // var result2 = outer();   // 每个函数在执行时, 会新开辟空间, 用于执行函数
+
+  // result();  // 1
+  // result();  // 2
+  // result();  // 3
+  // result();  // 4
+  // result2(); // 1
+
+  // result = null;
+  // result2 = null;
+
+
+
+
+  // function outer() {
+  //   // 实现计数器
+  //   var count = 0;  // 局部变量
+
+  //   function inner() {
+  //     count++;
+  //     console.log('执行了' + count + '次');
+  //   }
+  //   return inner;
+  // }
+  // var result = outer();
+
+
+  // 1. 如果希望省去 outer, 函数自调用
+  // var result = (function() {
+  //   // 实现计数器
+  //   var count = 0;  // 局部变量
+
+  //   function inner() {
+  //     count++;
+  //     console.log('执行了' + count + '次');
+  //   }
+  //   return inner;
+  // })();
+
+  // result();
+
+
+  // 2. 失望省去 inner
+  var result = (function() {
+    // 实现计数器
+    var count = 0;  // 局部变量
+
+    return function() {
+      count++;
+      console.log('执行了' + count + '次');
+    }
+  })();
+  result();
+
+
+
+
+
+</script>
+  
+</body>
+</html>

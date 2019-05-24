@@ -1,0 +1,36 @@
+﻿// post 请求报文
+------------------------------------------------------------------
+POST /ajax01/02.php HTTP/1.1
+
+Host: localhost
+Connection: keep-alive
+Content-Length: 31
+Cache-Control: max-age=0
+Origin: http://localhost
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,`*/*`;q=0.8
+Referer: http://localhost/ajax01/02-login.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+
+username=jepson&password=123456
+------------------------------------------------------------------
+
+
+
+// post 响应报文
+------------------------------------------------------------------
+HTTP/1.1 200 OK
+
+Date: Thu, 22 Jun 2017 16:51:22 GMT
+Server: Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45
+X-Powered-By: PHP/5.4.45
+Content-Length: 12
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html;charset=utf-8
+
+登录成功
+------------------------------------------------------------------

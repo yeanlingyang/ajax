@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>安装笔记</title>
+  <!-- <link rel="stylesheet" href="lib/css/monokai-sublime.css"> -->
+  <link rel="stylesheet" href="lib/css/default.min.css">
+  <link rel="stylesheet" href="lib/css/vs2015.css">
+  <link rel="stylesheet" href="lib/css/zTreeStyle/zTreeStyle.css">
+  <link rel="stylesheet" href="lib/css/base.css">
+  <link rel="stylesheet" href="lib/css/index.css">
+</head>
+
+<body>
+  <div style='width:25%;'>
+    <ul id="tree" class="ztree" style='width:100%'>
+
+    </ul>
+  </div>
+  <div id='readme' style='width:70%;margin-left:20%;'>
+    <article class='markdown-body'><h2 id="-phpstudy-web-">通过phpstudy把静态页面部署到web服务器</h2>
+<ol>
+<li><p>安装phpstudy，注意不能有中文路径</p>
+<ul>
+<li><p>双击软件</p>
+</li>
+<li><p>选择安装目录（注意，要求路径中不能有中文！！！默认的路径即可）</p>
+<p><img src="assets/php1.png" alt="php1"></p>
+</li>
+<li><p>点击ok之后，会默认跳转到phpstudy官网上，然后提示<code>为了防止重复初始化，选择是</code> 点击是即可！</p>
+<p><img src="assets/php2.png" alt="php2"></p>
+</li>
+<li><p>启动服务器</p>
+<p><img src="assets/1553710976866.png" alt="1553710976866"></p>
+</li>
+<li><p>然后可以访问自己本地的服务器，在地址栏中输入<code>127.0.0.1</code> 访问</p>
+</li>
+</ul>
+</li>
+<li><p>把自己的网页放到www文件夹中，找到安装目录下面的www文件夹，把www原有的文件删除, 把自己写好的页面放到这个文件夹中去</p>
+<p><img src="assets/1553711522852.png" alt="1553711522852"></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>默认会发现访问时, 会被拒绝</p>
+<p><img src="assets/1553711911657.png" alt="1553711911657"></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>设置允许目录访问</p>
+<p><img src="assets/1553712051723.png" alt="1553712051723"></p>
+</li>
+<li><p>通过查看自己的ip，通过浏览器输入ip地址访问自己写的网页</p>
+<blockquote>
+<p> 通过飞秋可以查看IP</p>
+<p>win+r 输入cmd，往黑窗口中输入ipconfig，回车，以太网适配器查看192.168开头</p>
+</blockquote>
+</li>
+</ol>
+</article>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="lib/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="lib/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="lib/js/ztree_toc.min.js"></script>
+<script type="text/javascript" src="lib/js/toc_conf.js"></script>
+<script src="lib/js/highlight.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // 代码高亮的js代码
+    hljs.initHighlightingOnLoad();
+
+    //生成侧边栏的代码
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+
+    var conf = eval(jquery_ztree_toc_opts);
+    $('#tree').ztree_toc(conf);
+  });
+</script>

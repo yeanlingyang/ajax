@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    表单提交的三个关键属性
+      1. action  用于指定提交的地址
+      2. 给 input 指定 name, 专门用于提交数据
+      3. method请求的类型, get  post
+   -->
+
+   <!-- 
+      get请求和post请求的区别:
+        1. get请求的参数, 会拼接在地址栏的后面, 但是 post 请求不会的
+        2. get请求参数会暴露, 相对不安全, post相对安全
+        3. get请求的参数在地址栏中, 地址栏的长度是有限制的, 不能提交大量的数据, 但是 post 可以提交大量的数据
+        4. get请求传输速率快!!
+        5. 一般从服务器获取数据, 一般用 get
+           但是如果是提交给服务器数据, 去修改内容等, 一般用 post
+    -->
+    
+  <!-- 
+    http协议: 就是一套规则, 规定了请求和响应的组成部分 以及 请求和响应需要遵循的规范
+      它规定, 每个请求, 都必须由  请求行  请求头   请求体  组成
+      它规定, 每个响应, 都必须由  状态行(响应行)  响应头  响应体  组成
+
+    get 请求 和 post 请求对比
+      1. 请求行: get请求会将传输的参数拼接在地址栏中, 但是 post 请求没有参数
+      2. 请求头: post请求多了 content-length 和 content-type, 可以说明请求体的内容长度和内容格式
+      3. 请求体: get请求没有请求体, 但是post请求, 请求参数, 都在请求体中
+  -->
+
+  <form action="02.php" method="get">
+
+    <input type="text" name="username"> <br>
+    <input type="password" name="password"> <br>
+
+    <input type="submit">
+ 
+  </form>
+
+  
+</body>
+</html>

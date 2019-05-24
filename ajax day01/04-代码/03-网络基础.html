@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  // 用户在地址栏输入 www.baidu.com, 发生了什么 ?  初学者: 浏览器显示了百度的页面
+  // 1. 会先将 www.baidu.com 经过 dns 解析, 将 域名转成 ip 地址
+  // 2. 根据 ip 地址, 发送对应请求到服务器
+  // 3. 找到对应请求的文件, 响应给浏览器
+  // 4. 浏览器, 得到响应内容, 解析显示在页面
+
+
+  // 1. ip地址: 就是一串有规律的数字, xxx.xxx.xxx.xxx  192.168.48.98
+  // 只要一台电脑 连接上了 互联网 或者 局域网, 都会有自己唯一的 ip 地址 (就像手机号, ip地址可以定位一台计算机)
+
+  // 2. 端口号: 每台计算机有着很多个软件, 每个软件都会有自己的对应端口号
+  // http://192.168.48.98:80  http, web网页服务的端口, 默认80端口
+
+  // 通过 ip 地址, 可以定位一台计算机, 通过端口号, 可以定位一个对应软件服务
+
+
+  // 早期: 只有ip地址, 计算机之间的访问, 确实是通过 ip 地址的!!!    百度ip地址 115.239.210.27  
+  // 但是: ip地址 不好记, 不易于推广
+  // 后来就出了域名
+
+  // 3. 域名: 其实就是给ip地址起了一个名字  www.baidu.com     115.239.210.27
+  //    实际: 浏览器在用户输入网址(域名地址)之后, 浏览器会先将 www.baidu.com这样的地址, 解析成 ip, 最终来访问
+
+  // 4. 域名解析, DNS解析, 有专门的dns服务器, 负责将 域名 解析 成 ip 地址
+
+</script>
+  
+</body>
+</html>
