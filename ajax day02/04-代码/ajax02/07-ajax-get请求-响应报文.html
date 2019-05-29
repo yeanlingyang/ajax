@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+
+<button>发送get请求</button>
+<div>
+
+</div>
+
+<script>
+
+  var btn = document.querySelector('button');
+  var div = document.querySelector('div');
+
+  btn.onclick = function() {
+    // 1. 创建 ajax 对象
+    var xhr = new XMLHttpRequest();
+
+    // 2. 发送请求  get
+    // 请求行, get请求的参数拼接在地址栏中
+    xhr.open('get', '07.php?username=pp&password=123456');
+    // 请求头, get 不用设置
+    xhr.send(null);  // get请求没有请求体, 直接send
+
+    // 3. 处理响应 readyState 就标记了 ajax对象的状态
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        // 响应接收完成了
+        // console.log(xhr.responseText); 
+        // div.innerText = xhr.responseText;
+
+        // 响应报文: 状态行  响应头   响应体
+        // console.log(xhr.responseText);  // 响应体
+
+        // 1. 获取状态, xhr.status 可以获取响应的状态码
+        //    200 成功  302重定向  304缓存  404 找不到  5xx 服务器错误
+        console.log(xhr.status);
+
+        // 2. 响应头 
+        console.log(xhr.getAllResponseHeaders());  // 获取所有的响应头信息
+        console.log(xhr.getResponseHeader('content-type')); // 获取单独的某一条信息
+
+        // 3. 响应体
+        console.log(xhr.responseText);
+      }
+    }
+
+  }
+
+</script>
+
+
+  
+</body>
+</html>

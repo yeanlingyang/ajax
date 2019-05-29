@@ -1,0 +1,26 @@
+<users>
+  <user>
+    <name>张飞</name>
+    <gender>男</gender>
+    <age>18</age>
+    <desc>大黑飞飞</desc>
+  </user>
+  <user>
+    <name>关羽</name>
+    <gender>男</gender>
+    <age>30</age>
+    <desc>大关刀!!</desc>
+  </user>
+  <user>
+    <name>赵云</name>
+    <gender>男</gender>
+    <age>20</age>
+    <desc>大鹏展翅!!</desc>
+  </user>
+  <user>
+    <name>刘备</name>
+    <gender>男</gender>
+    <age>60</age>
+    <desc>刘皇叔</desc>
+  </user>
+</users>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+
+  // js是单线程的, 代码需要一行一行的执行, 如何实现异步呢???  (事件循环)
+
+  console.log(1);
+  console.log(2);
+
+  // 定时器 延时器 ajax 都是异步的, 异步的代码不会阻塞其他代码的执行
+  setTimeout(function() {
+    console.log(3);
+  }, 1000);
+  setTimeout(function() {
+    console.log(4);
+  }, 0);
+
+  console.log(5);
+
+
+</script>
+  
+</body>
+</html>

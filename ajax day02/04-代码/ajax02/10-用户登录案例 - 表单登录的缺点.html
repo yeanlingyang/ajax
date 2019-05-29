@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    表单提交
+      1. action 指定提交的地址
+      2. name 提交给后台的字段名
+      3. method 提交方式 get/post
+
+    好处: 比较简单
+    缺点: 发生了页面跳转, 用户体验就差了    (同步提交: form表单提交)    (异步提交: ajax提交)
+   -->
+  <form action="10.php" method="post">
+    <input type="text" name="username"> <br>
+    <input type="password" name="password"> <br>
+
+    <input type="submit">
+  </form>
+
+</body>
+</html>

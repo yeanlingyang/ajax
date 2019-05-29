@@ -1,0 +1,107 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table {
+      border: 1px solid #000;
+      width: 500px;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+    th {
+      height: 40px;
+      line-height: 40px;
+      background-color: #ccc;
+      border: 1px solid #000;
+    }
+    td {
+      text-align: center;
+      border: 1px solid #000;
+    }
+  
+  </style>
+</head>
+<body>
+
+<button id='getInfo'>获取数据</button>
+<table>
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr>
+      <td>张飞</td>
+      <td>男</td>
+      <td>18</td>
+      <td>不错</td>
+    </tr> -->
+  </tbody>
+</table>
+
+<script>
+
+  // 思路:
+  // 1. 给按钮添加点击事件
+  // 2. 发送ajax请求, 获取数据
+  // 3. 得到 xml 数据, 完成渲染
+  var btn = document.querySelector('#getInfo');
+  var tbody = document.querySelector('tbody');
+
+  btn.onclick = function() {
+    // 1. 创建ajax对象
+    var xhr = new XMLHttpRequest();
+    // 2. 发送请求 get
+    xhr.open('get', '13-xml.php');
+    xhr.send(null);
+
+    // 3. 处理响应
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 成功响应
+        // 一般响应都是文本格式, responseText
+        // 但是如果是 xml 格式, 需要使用 responseXML
+        // console.log(xhr.responseText);
+
+        // xml不支持 innerText
+        // 这种方式读取， 得到的是一个 dom 对象, 可以使用dom的方法!!!
+        // console.log(xhr.responseXML); 
+
+        var result = xhr.responseXML; // dom对象
+        var allUsers = result.querySelectorAll('user');
+        // console.log(allUsers);
+        // console.log(allUsers[0].children[0].innerHTML);
+
+        var htmlStr = '';
+        // 遍历allUsers  字符串拼接
+        for (var i = 0; i < allUsers.length; i++) {
+          var str = "<tr>" +
+                    "  <td>"+ allUsers[i].children[0].innerHTML +"</td>" +
+                    "  <td>"+ allUsers[i].children[1].innerHTML +"</td>" +
+                    "  <td>"+ allUsers[i].children[2].innerHTML +"</td>" +
+                    "  <td>"+ allUsers[i].children[3].innerHTML +"</td>" +
+                    "</tr>";
+          htmlStr += str;
+        }
+
+        tbody.innerHTML = htmlStr;
+      }
+    }
+  };
+
+  // xml格式注意点:
+  // 后台必须设置类型 text/xml
+  // 前端请求完, 接收需要 responseXML 来接收, 接收得到的是 dom, 需要通过 dom 的方式取出值!!!
+
+</script>
+
+</body>
+</html>

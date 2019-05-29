@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <input type="text" id="inp"><br>
+  <input type="password" id="pass"><br>
+  <button>点击登录</button>
+
+  <script> 
+    
+    var btn = document.querySelector('button');
+    var inp = document.querySelector('#inp');
+    var pass = document.querySelector('#pass');
+
+    btn.onclick = function() {
+      // 获取用户名和密码
+      var username = inp.value.trim();
+      var password = pass.value.trim();
+
+      // 发送请求到服务器端
+      // 1. 创建对象
+      var xhr = new XMLHttpRequest();
+
+      // 2. 发送请求
+      xhr.open('post', '11.php');  // post请求参数在请求体中
+      // 需要额外设置请求头
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      // post请求, send(请求体)
+      // xhr.send('username=pp&password=123456');
+      xhr.send('username='+ username +'&password=' + password);
+
+      // 3. 处理响应
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // 响应完成, 且响应成功
+          // console.log(xhr.responseText);
+          if (xhr.responseText === 'yes') {
+            // 登录成功
+            alert('大兄弟,登录成功, 欢迎!!!');
+            location.href = 'http://www.baidu.com';
+          }
+          else {
+            // 登录失败
+            alert('登录失败');
+            // 清空密码
+            pass.value = '';
+          }
+        } 
+      }
+
+    }
+  
+  
+  </script>
+  
+</body>
+</html>

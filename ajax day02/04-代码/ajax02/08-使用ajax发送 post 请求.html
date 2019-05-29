@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <!-- <form action="" enctype="application/x-www-form-urlencoded"></form> -->
+  <!-- form表单提交  enctype 属性设置传输的数据格式, 默认就是 application/x-www-form-urlencoded -->
+  <button>发送post请求</button>
+  <div>
+
+  </div>
+
+  <script>
+  
+    var btn = document.querySelector('button');
+    var div = document.querySelector('div');
+
+    btn.onclick = function() {
+      // 1. 创建ajax对象
+      var xhr = new XMLHttpRequest();
+      
+      // 2. 发送请求
+      // 2.1 请求行  open(type, url);  post的参数不在地址栏中, 在请求体中
+      xhr.open('post', '08.php');
+      // 2.2 请求头  post请求需要设置请求头     content-type必须设置  content-length可以不设置
+      // 设置请求头
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+
+      // 2.3 请求体  post请求有请求头, 参数拼接在请求体中
+      xhr.send('username=pp&password=123456');
+
+      // 3. 处理响应
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          // 说明响应回来了
+          if (xhr.status === 200) {
+            // 200成功 才做处理
+            div.innerText = xhr.responseText;
+          }
+        }
+      }
+    }
+  
+  </script>
+  
+</body>
+</html>

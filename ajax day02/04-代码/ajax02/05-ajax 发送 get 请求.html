@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #000;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <button>发送请求</button>
+  <div></div>
+
+  <script>
+  
+    var btn = document.querySelector('button');
+    var div = document.querySelector('div');
+
+    // 点击按钮, 发送 get 请求
+    btn.onclick = function() {
+      // 发送 ajax 请求
+      // 1. 先创建 ajax 对象, 构造函数 XMLHttpRequest
+      //    通过 ajax 对象, 就可以发送 get / post 请求了
+      var xhr = new XMLHttpRequest();
+
+      // 2. 发送请求, 遵循http协议, 规定了请求的组成部分
+      // 2.1 请求行
+      //     open(type, url); 
+      //     参数1: 请求方式    参数2: 请求地址
+      xhr.open('get', '05.php');
+
+      // 2.2 请求头
+      //     get请求的请求头, 默认会被浏览器设置好, 我们不需要额外设置
+
+      // 2.3 请求体  send(请求体)
+      //     get请求没有请求体
+      xhr.send(null);
+
+
+      // 3. 处理响应
+      // 获取响应的内容, xhr.responseText
+      // console.log(xhr.responseText);
+      // 由于ajax请求是异步的, 而且是发送请求响应是需要时间 (是让浏览器等)
+      // readyState 表示 ajax 对象的状态 (0-4)  只有是 4 的时候, 才表示响应接收完成了
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          // 此时才表示响应接收完成
+          // console.log(xhr.responseText);
+          div.innerText = xhr.responseText;
+        }
+      }
+    };
+  
+  
+  </script>
+  
+</body>
+</html>

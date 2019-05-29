@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <input type="text"><span></span>
+
+  <script>
+    // 1. 注册 blur 事件, 获取input的值
+    // 2. 发送ajax请求到服务器文件
+    // 3. 后台会处理请求, 将结果返回
+    // 4. 根据结果, 进行处理显示
+
+    // get请求的参数, 放在哪里???
+    // get请求的参数, 在请求行的 地址栏的最后面
+    // 格式:  ?键=值&键=值
+
+    var inp = document.querySelector('input');
+    var span = document.querySelector('span');
+
+    inp.onblur = function() {
+      var value = this.value.trim();  // 值  pengpeng
+
+      // 发送ajax请求
+      // 1. 创建ajax对象
+      var xhr = new XMLHttpRequest();
+      // 2. 发送请求
+      // 2.1 请求行  open(type, url)
+      xhr.open('get', '06.php?username=' + value);
+
+      // 2.2 请求头  get不用设置
+
+      // 2.3 请求体  send(null);  // get请求没有请求体, 直接send
+      xhr.send(null);
+
+
+      // 3. 处理响应
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          // 4 才说明, 响应接收完成
+          console.log(xhr.responseText);  // 响应体
+          if (xhr.responseText === 'yes') {
+            // 用户名已存在
+            span.innerText = '用户名已存在';
+            span.style.color = 'red';
+          }
+          else {
+            span.innerText = '用户名可以使用';
+            span.style.color = 'green';
+          }
+        }
+      }
+    }
+  
+  
+  </script>
+
+
+</body>
+</html>

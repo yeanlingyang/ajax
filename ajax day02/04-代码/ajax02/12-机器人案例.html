@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ajax</title>
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+      }
+
+      h3 {
+        text-align: center;
+      }
+
+      .chatbox {
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+
+      .messages {
+        height: 350px;
+        padding: 20px 40px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #ccc;
+        overflow: scroll;
+      }
+
+      .messages h5 {
+        font-size: 20px;
+        margin: 10px 0;
+      }
+
+      .messages p {
+        font-size: 18px;
+        margin: 0;
+      }
+
+      .self {
+        text-align: left;
+      }
+
+      .other {
+        text-align: right;
+      }
+
+      .form {
+        height: 150px;
+      }
+
+      .form .input {
+        height: 110px;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+
+      .form .btn {
+        height: 40px;
+        box-sizing: border-box;
+        border-top: 1px solid #ccc;
+      }
+
+      .form textarea {
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border: none;
+        resize: none;
+        outline: none;
+        font-size: 20px;
+      }
+
+      .form input {
+        display: block;
+        width: 100px;
+        height: 30px;
+        margin-top: 5px;
+        margin-right: 20px;
+        float: right;
+      }
+    </style>
+</head>
+
+<body>
+  <h3>简单的Ajax实例</h3>
+  <div class="chatbox">
+    <!-- 聊天内容 -->
+    <div class="messages">
+      <div class="self">
+        <h5>我说</h5>
+        <p>你好</p>
+      </div>
+      <div class="other">
+        <h5>对方说</h5>
+        <p>你好</p>
+      </div>
+
+    </div>
+    <div class="form">
+      <div class="input">
+        <textarea></textarea>
+      </div>
+      <div class="btn">
+        <input type="button" value="发送" />
+      </div>
+    </div>
+  </div>
+
+<script>
+  // 1. 给发送按钮添加点击事件, 点击时, 获取textarea的文本 value值
+  // 2. 动态创建我说部分, 动态创建 div, 类名 self, 并添加到聊天框中
+  // 3. 发送ajax请求到服务器, 服务器会返回一句话
+  // 4. 根据返回的话, 动态他说部分, 动态创建 div, 类名 other, 并添加到聊天框中
+
+  // 让滚动条, 滚动到显示这个盒子
+  // 盒子.scrollIntoView(); 让滚动条显示到盒子的位置
+
+  var btn = document.querySelector('.btn > input'); // 发送按钮
+  var textarea = document.querySelector('.form textarea');
+  var messages = document.querySelector('.messages');
+
+  btn.onclick = function() {
+    var value = textarea.value.trim(); // 获取值
+    textarea.value = ''; // 清空内容
+    if (value === '') {
+      return;
+    }
+
+    // 肯定是有值的
+    // 动态创建我说部分
+    var div = document.createElement('div');
+    messages.appendChild(div);
+    div.className = 'self';
+    div.innerHTML = "<h5>我说</h5><p>" + value + "</p>";
+    div.scrollIntoView();
+
+    // 发送ajax请求, 要求使用post
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', '12.php');
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+    xhr.send('msg=' + value);
+
+    // 处理响应
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 响应成功
+        var result = xhr.responseText; // 获取结果
+
+        // 动态创建他说部分
+        var div = document.createElement('div');
+        messages.appendChild(div);
+        div.className = 'other';
+        div.innerHTML = '<h5>对方说</h5><p>' + result + '</p>';
+        div.scrollIntoView();
+      }
+    }
+  }
+  textarea.onkeyup = function(e) {
+    if (e.keyCode === 13) {
+      btn.onclick();
+    }
+  }
+  
+
+</script>
+</body>
+
+</html>
