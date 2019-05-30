@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button id="get">发送get请求</button>
+
+  <button id="post">发送post请求</button>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+
+    // $.ajax({});      =>  vue  axios  fetch
+
+    // 其他方法(了解): 
+    // 1. $.get({ })  和普通 $.ajax 的区别在于, 可以少指定一个 type 类型
+    // 2. $.get( url, [data], [success], [dataType] );  优点: 简洁,   缺点: 参数有限制!!
+
+    // 3. $.post({ })  和普通 $.ajax 的区别在于, 可以少指定一个 type 类型
+    // 4. $.post( url, [data], [success], [dataType] ); 优点: 简洁,   缺点: 参数有限制!!
+
+    // 5. $.getJSON(url, [data], [success])  可以少指定 type 和 dataType, 可以读取一个json文件
+    // 6. $.getScript(url, [success]);  可以读取一个js文件 可以通过 eval 或者 new Function 来执行
+
+    // 7. $('div').load('html文件路径');  可以让一个盒子读取一个 html 内容, 并添加到自己里面去  (组件化的雏形, 实际开发, 如果用这种方式, 性能加载速度, 很慢的)  => 将来组件化 vue react
+
+
+
+    $('#get').click(function () {
+      // 发送get请求
+      $.get('05-get.php', { username: 'pp', password: '123456' }, function(info) {
+        console.log(info);
+      }, 'json');
+    });
+
+
+    $('#post').click(function () {
+      // 发送post请求
+      $.post('05-post.php', { username: 'pp', password: '123456' }, function(info) {
+        console.log(info);
+      }, 'json');
+    });
+
+
+    // $.getJSON(url, [data], [success])  可以直接读取一个json文件
+    $.getJSON('data.json', function(info) {
+      console.log(info);
+    });
+
+    $.getScript('jquery-1.12.4.js', function(info) {
+      // 如果读过来是一个字符串格式的 js 内容, 如果执行呢???
+      // eval(str)     new Function(str);
+      console.log(info);
+    });
+
+
+
+
+  </script>
+
+</body>
+
+</html>

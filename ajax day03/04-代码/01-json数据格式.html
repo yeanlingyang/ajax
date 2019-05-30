@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  // 通用数据格式: 前端 后端 语言是不同, java  c#   php 语言都不一样
+  // 前端的 对象 / 数组, 需要先转换成 通用的格式, 才能传给后台
+  // 后端的 对象 / 数组, 也要先转成   通用的格式, 才能传给前端
+
+  // 通用数据格式: xml  JSON
+  // xml 和 JSON 都可以传输大量的数据, 但是 xml 解析起来, 必须按照dom的方式解析, 非常麻烦
+
+
+  // json格式:  (所有语言都能识别的一种字符串格式)
+  // 1. 本质上就是一个字符串, 有着特殊的格式!!
+  // 2. 要求: 属性名必须用双引号引起来, 如果属性值是 字符串, 也要用 双引号引起来
+
+  // json格式, 除了js的对象可以, js的数组也满足json格式要求
+
+  
+  // js的对象
+  // var obj = {
+  //   name: 'zs',
+  //   age: 18
+  // };
+  // // json字符串
+  // var jsonStr = '{ "name": "zs", "age" : 18 }';
+
+  // var arr = ['张三', '李四', '王五'];
+  // // json字符串
+  // var jsonStr2 = '["张三", "李四", "王五"]';
+
+
+
+
+  // 1. 将 js 的数组 / 对象, 转成 json 字符串  JSON.stringify(obj/arr)
+  // var obj = {
+  //   name: 'zs',
+  //   age: 18
+  // };
+  // var json = JSON.stringify(obj);
+  // console.log(json);
+
+  // var arr2 = ['张三', '李四', '王五'];
+  // var json2 = JSON.stringify(arr2);
+  // console.log(json2);
+
+
+  // // 学生数组
+  // var arr3 = [
+  //   { name: 'zs', age: 18, desc: '不错' },
+  //   { name: 'zs', age: 18, desc: '不错' },
+  //   { name: 'zs', age: 18, desc: '不错' },
+  //   { name: 'zs', age: 18, desc: '不错' }
+  // ];
+  // var json3 = JSON.stringify(arr3);
+  // console.log(json3);
+
+
+
+  // 2. 将 json 字符串, 转换成 js 的数组或者对象   JSON.parse(jsonStr);
+  // var json1 = '{"name":"zs","age":18}';
+  // console.log(JSON.parse(json1));
+
+  // var json2 = '["张三","李四","王五"]';
+  // console.log(JSON.parse(json2));
+
+  // var json3 = '[{"name":"zs","age":18,"desc":"不错"},{"name":"zs","age":18,"desc":"不错"},{"name":"zs","age":18,"desc":"不错"},{"name":"zs","age":18,"desc":"不错"}]';
+  // console.log(JSON.parse(json3));
+
+
+
+  /* 
+    json格式特点:
+      1. 就是一个字符串, 有格式的字符串
+      2. 所有的属性名, 都要用双引号引起来, 如果属性值是字符串, 也要用双引号引号!!
+
+    js操作json数据
+      1. JSON.stringify(arr/obj)  将数组或者对象, 转成 json字符串
+      2. JOSN.parse(jsonStr)      将json字符串, 转成js的数组或者对象
+  
+  */
+
+
+
+
+
+</script>
+  
+</body>
+</html>

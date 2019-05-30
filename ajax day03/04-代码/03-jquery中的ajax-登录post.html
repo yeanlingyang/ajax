@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  用户名: <input type="text" id="user"> <br><br>
+  密码: <input type="password" id="pass"> <br><br>
+
+  <button>登录请求-post</button>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+  
+    $(function() {
+
+      $('button').click(function() {
+        // $.ajax({ ... })
+        // type: 请求方式, 默认是 get, 可以传 get/post
+        // url: 请求地址, 
+        // data: 请求参数, 不管是 get 还是 post, 参数一律写在 data 中
+        //       jquery中data参数, 允许直接传字符串格式, 字符串是网络中传输的标准格式  key=value&key=value
+        //       还允许, 直接传对象, 内部会将对象, 最终拼成字符串的格式, 进行网络传输
+        // dataType: 后台返回的数据格式, 将来jquery会根据这个格式来进行解析!! 
+        //           如果传了 json, 在数据回来后, 会自动调用 JSON.parse 解析成数组或者对象
+        //           xml / json / text
+
+        // success: ajax成功时, 会调用的函数    jquery在ajax成功回来后, 会自动调用 success(xhr.responseText);
+        // error:   ajax失败时, 会调用的函数
+
+        $.ajax({
+          type: 'post',
+          url: '03-post.php',
+          // data: 'username='+ $('#user').val() +'&password=' + $('#pass').val()
+          data: {
+            username: $('#user').val(),
+            password: $('#pass').val()
+          },
+          // 写了肯定没问题, 会按照 json 格式帮你 JSON.parse
+          // 如果后台已经指定了返回类型格式是 json 格式, 此时这个 dataType 是可以省略的
+          dataType: 'json',
+          // 200 成功
+          success: function(info) {
+            // console.log('ajax请求成功');
+            // info 专门用于接收  后台返回的 数据内容  xhr.responseText
+            console.log(info);
+            // var result = JSON.parse(info);
+
+            var result = info;
+            if (result.status === 0) {
+              // 用户名或者密码错误
+              alert(result.msg);
+              $('#pass').val('');
+            }
+            if (result.status === 1) {
+              // 登陆成功
+              alert(result.msg);
+              // 跳转到首页
+              location.href = 'http://www.baidu.com';
+            }
+          },
+          // 404 5xx 失败
+          error: function() {
+            alert('服务器繁忙, 请稍后重试');
+          }
+        });
+
+      });
+
+
+
+    });
+
+    /* 
+      发送ajax请求, $.ajax({})
+        1. type: 请求类型,  get / post
+        2. url:  请求地址   
+        3. data: 请求参数
+        4. dataType: 后台返回数据类型, 将来会根据设置的格式进行解析   xml / json / text
+
+        5. success: 成功的回调函数,  成功时, 会调用执行的函数
+        6. error: 失败的回调函数, 失败时, 会调用执行的函数
+    */
+  
+  
+  </script>
+
+
+  
+</body>
+</html>

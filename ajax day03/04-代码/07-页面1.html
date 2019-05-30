@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- 头部部分 -->
+  <div id="head">
+    <!-- 这里面专门用于加载对应的头部的内容 -->
+  </div>
+
+  <div>
+    <p>我是内容部分</p>
+    <p>我是内容部分</p>
+    <p>我是内容部分</p>
+    <p>我是内容部分</p>
+    <p>我是内容部分</p>
+    <p>我是内容部分</p>
+    <p>我是内容部分</p>
+  </div>
+
+  <!-- 底部部分 -->
+  <div id="foot">
+    <!-- 这里面专门用于加载对应的底部的内容 -->
+  </div>
+  
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+    
+    // $('div').load('html文件路径');
+    // 加载头部的内容
+    $('#head').load('header.html');
+    $('#foot').load('footer.html');
+  
+  </script>
+
+</body>
+</html>

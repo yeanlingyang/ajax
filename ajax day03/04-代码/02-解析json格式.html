@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table {
+      border: 1px solid #000;
+      width: 500px;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+    th {
+      height: 40px;
+      line-height: 40px;
+      background-color: #ccc;
+      border: 1px solid #000;
+    }
+    td {
+      text-align: center;
+      border: 1px solid #000;
+    }
+  
+  </style>
+</head>
+<body>
+
+<button id='getInfo'>获取数据</button>
+<table>
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr>
+      <td>张飞</td>
+      <td>男</td>
+      <td>18</td>
+      <td>不错</td>
+    </tr> -->
+  </tbody>
+</table>
+
+<script>
+  // ajax 封装 (之前的视频, 给到你们, 讲了ajax参数的封装, (有难度!!!) 衍生拓展)
+  // jquery过渡的库, 将来一般用 vue  react  也有自己的封装好的发ajax的方式  axios  fetch
+
+  // 思路:
+  // 1. 给按钮添加点击事件
+  // 2. 发送ajax请求, 获取json格式的数据  get
+  // 3. 根据json格式的数据, 解析渲染tbody
+  var btn = document.querySelector('#getInfo');
+  var tbody = document.querySelector('tbody');
+
+  btn.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', '02.php');
+    xhr.send(null);
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var allUsers = JSON.parse(xhr.responseText);
+        console.log(allUsers);
+
+        var htmlStr = '';
+        for (var i = 0; i < allUsers.length; i++) {
+          var str = '<tr>' +
+                    '  <td>'+ allUsers[i].name +'</td>' +
+                    '  <td>'+ allUsers[i].gender +'</td>' +
+                    '  <td>'+ allUsers[i].age +'</td>' +
+                    '  <td>'+ allUsers[i].desc +'</td>' +
+                    '</tr>';
+          htmlStr += str;
+        }
+
+        tbody.innerHTML = htmlStr;
+
+      }
+    }
+  };
+  // json 和 xml 从数据传输方面, 功能一样, 都可以传输大量的数据
+
+  // 但是相比而言, xml解析起来 必须按照 dom 的方式解析, 很麻烦,
+  // 而 json 只需要通过访问 对象的属性, 就可以拿到需要的值了
+
+
+</script>
+
+</body>
+</html>

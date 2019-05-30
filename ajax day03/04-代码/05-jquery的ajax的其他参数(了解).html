@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button id="get">发送get请求</button>
+
+  <button id="post">发送post请求</button>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+
+    // jquery的ajax的其他参数 (了解)
+    // 1. timeout  设置超时时间, 如果超过超时时间, 就不等了, 直接进 error
+    //             其实有一些数据, 有时效性, 一般会设置超时时间, 只要超过了超时时间, 不等了
+    // 2. beforeSend  发送请求前, 会调用的函数, 如果return false, 阻止ajax的提交
+    // 3. complete    ajax完成时, 调用, 不管成功还是失败, 只要ajax响应回来, 就会调用
+
+    $('#get').click(function () {
+
+      // 发送get请求
+      $.ajax({
+        type: 'get',
+        url: '05-get.php',
+        data: {
+          username: 'pp',
+          password: '123456'
+        },
+        dataType: 'json',
+        // timeout: 3000,
+        beforeSend: function() {
+          console.log('ajax发送前调用...');
+
+          // return false;
+        },
+        success: function (info) {
+          console.log(info)
+        },
+        error: function () {
+          alert('服务器繁忙')
+        },
+        complete: function() {
+          console.log('不管成功还是失败, 都执行');
+        }
+      })
+    });
+
+
+    $('#post').click(function () {
+      // 发送post请求
+      $.ajax({
+        type: 'post',
+        url: '05-post.php',
+        data: {
+          username: 'pp',
+          password: '123456'
+        },
+        dataType: 'json',
+        success: function (info) {
+          console.log(info)
+        },
+        error: function () {
+          alert('服务器繁忙')
+        }
+      })
+    });
+
+
+
+    // $.ajax({})
+    // type 请求方式
+    // url  地址
+    // data 参数
+    // dataType 返回类型
+    // success  成功回调函数
+    // error    失败回调函数
+    // timeout  超时时间
+    // beforeSend 发送ajax前调用的函数, return false, 会阻止ajax的提交
+    // complete   不管ajax成功还是失败, 都会执行
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <input type="text"> <span></span>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+    // 思路:
+    // 1. 给input 注册 blur 事件
+    // 2. 一旦失去焦点, 获取 input 的值
+    // 3. 发送ajax请求到服务器
+    // 4. 根据服务器的响应, 进行处理
+    $('input').blur(function() {
+
+      var value = $(this).val().trim(); // 获取值
+
+      // 发送 ajax 请求, get请求
+      // type url data success  dataType  error
+      $.ajax({
+        url: '04-get.php',
+        data: {
+          username: value
+        },
+        dataType: 'json',
+        success: function(info) {
+          console.log(info);
+          if (info.code === 0) {
+            // 用户名可用
+            $('span').text(info.msg).css('color', 'green');
+          }
+
+          if (info.code === 1) {
+            // 用户名不可用
+            $('span').text("注意: 用户名不可用").css('color', 'red');
+          }
+        }, 
+        error: function() {
+          alert('服务器繁忙');
+        }
+      })
+
+    });
+  
+  
+  </script>
+  
+</body>
+</html>
