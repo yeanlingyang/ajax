@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <style>
+    .item {
+        float: left;
+        width: 320px;
+        border: 1px solid #0094ff;
+        overflow: hidden;
+        margin: 10px;
+        padding: 5px;
+      }
+
+      .item .title {
+        display: block;
+        width: 100%;
+        position: relative;
+      }
+
+      .title img {
+        display: block;
+        height: 180px;
+
+        width: 100%;
+      }
+
+      .title span {
+        position: absolute;
+        right: 20px;
+        bottom: 0px;
+        width: 50px;
+        text-align: center;
+        background-color: lightgray;
+        color: gray;
+        font-size: 13px;
+        border-radius: 5px 5px 0 0;
+      }
+
+      .content {
+        height: 100px;
+        padding: 10px;
+        overflow: hidden;
+      }
+
+      .content a {
+        text-decoration: none;
+        color: black;
+        font-family: '微软雅黑';
+        font-size: 16px;
+      }
+
+      .content p {
+        color: gray;
+        font-size: 13px;
+        font-family: '微软雅黑';
+        margin-bottom: 0;
+      }
+
+      .f_l {
+        float: left;
+      }
+
+      .f_r {
+        float: right;
+      }
+
+      .clearfix::before,
+      .clearfix::after {
+        content: '';
+        display: block;
+        line-height: 0;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+
+      .info {
+        line-height: 25px;
+      }
+
+      .info img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+
+      .info a {
+        color: gray;
+        text-decoration: none;
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+        margin: 0 10px;
+      }
+    </style>
+</head>
+
+<body>
+  <input type="number" id="num" />
+  <button id="btn">获取数据</button>
+
+  <div class="items">
+    <!-- 挖个坑 -->
+  </div>
+
+
+<script type="text/html" id="tpl">
+  {{ each items v i }}
+    <!-- v 是每一项, 就是一个个的对象 -->
+    <!-- i 是下标 -->
+
+    <!--div作为容器-->
+    <div class="item clearfix">
+      <a href="#" class="title">
+        <img src="{{ v.img }}" alt="" />
+        <span>{{ v.time }}</span>
+      </a>
+      <div class="content">
+        <a href="#">{{ v.title }}</a>
+        <p>
+          {{ v.novel }}
+        </p>
+      </div>
+      <div class="info clearfix">
+        <a href="#" class="f_l">
+          <img src="{{ v.icon }}" alt="" />{{ v.name }}</a>
+        <a href="#" class="f_r">信息:{{ v.messNum }}</a>
+        <a href="#" class="f_r">❤:{{ v.starNum }}</a>
+        <a href="#" class="f_r">赞:{{ v.goodNum }}</a>
+      </div>
+    </div>
+  {{ /each }}
+</script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/template-web.js"></script>
+<script>
+  /* 
+    模板引擎的步骤:
+      1. 引包
+      2. 准备模板  准备一个 script 并且指定 type='text/html'  指定 id
+      3. 准备数据 (发送ajax请求)
+      4. 将数据和模板结合, template(模板id, 数据对象); 返回一个 htmlStr
+      5. 根据 htmlStr 将盒子渲染
+      6. 修改模板, 让对象的数据显示
+  */
+
+  // 1. 点击获取数据按钮, 发送ajax请求
+  // 2. 获取数据, 根据数据, 通过模板引擎进行渲染
+  $('#btn').click(function() {
+    var num = $('#num').val().trim();
+
+    $.ajax({
+      type: 'get',
+      url: 'smzdm.php',
+      data: {
+        num: num
+      },
+      dataType: 'json',
+      success: function(info) {
+        console.log(info);
+        // 将数据和模板相结合, 传进去的数据对象的所有属性, 可以在模板中直接使用
+        var htmlStr = template('tpl', info);
+        $('.items').html(htmlStr);
+      }
+    })
+
+  });
+
+
+
+</script>
+</body>
+
+</html>

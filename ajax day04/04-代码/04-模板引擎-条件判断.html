@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<!-- 静态页面 -->
+<div id="box">
+
+</div>  
+
+<!-- 
+  使用模板引擎的步骤:
+    1. 引包
+    2. 准备模板, 准备一个script标签, 存放静态内容, 指定类型 type='text/html', 指定id
+    3. 准备数据
+    4. 将数据和模板相结合,  template(模板id, 数据对象) 返回一个的html字符串
+    5. 将得到的 html字符串 渲染到盒子中
+    6. 修改模板, 让对象中的数据, 能够展示给用户
+       传进去对象的所有属性, 在模板中都可以直接使用!!!
+-->
+
+<!-- 指定了 text/html 后, 1. 不会被js执行  2. 不会显示在页面中 -->
+<script type="text/html" id="tpl">
+  <h3>个人中心</h3>
+  <p>姓名: {{ name.toUpperCase() }}</p>
+  <p>年龄: {{ age }}</p>
+  <p>性别: {{ gender === 1 ? '男' : '女' }}</p>
+
+  <!-- 如果 >= 18 岁, 就可以打王者 -->
+  <!-- 如果 <  18 岁, 回家喜洋洋 -->
+  
+  {{ if age >= 18 }}
+    <div>兴趣爱好</div>
+    <div>打王者</div>
+  {{ /if }}
+
+  {{ if age < 18 }}
+    <div>兴趣爱好</div>
+    <div>看喜洋洋</div>
+  {{ /if }}
+
+  <hr><hr>
+
+  {{ if age >= 18 }} 
+    <div>兴趣爱好</div>
+    <div>打王者</div>
+  {{ else }}
+    <div>兴趣爱好</div>
+    <div>看喜洋洋</div>
+  {{ /if }}
+
+
+  <hr><hr>
+  <!-- 如果 >= 60岁, 公园打太极 -->
+  <!-- 如果 18~60 岁, 就可以打王者 -->
+  <!-- 如果 <  18 岁, 回家喜洋洋 -->
+  {{ if age >= 60 }}
+    <div>兴趣爱好</div>
+    <div>公园打太极</div>
+  {{ else if age >= 18 }} 
+    <div>兴趣爱好</div>
+    <div>打王者</div>
+  {{ else }}
+    <div>兴趣爱好</div>
+    <div>看喜洋洋</div>
+  {{ /if }}
+
+</script>
+
+<script src="./template-web.js"></script>
+<script>
+
+  var box = document.querySelector('#box');
+  // 后台返回的数据
+  var obj = {
+    name: '老王',
+    age: 80,
+    gender: 1
+  };
+
+  // 将数据和模板相结合
+  var htmlStr = template('tpl', obj);
+  box.innerHTML = htmlStr;
+
+  /* 
+    条件判断:
+      {{ if 条件 }}
+
+      {{ /if }}
+      
+
+      {{ if 条件 }}
+
+      {{ else }} 
+
+      {{ /if }}
+
+
+      {{ if 条件 }}
+
+      {{ else if 条件 }}
+
+      {{ else if 条件 }}
+
+      {{ else }}
+
+      {{ /if }}
+  
+  */
+
+</script>
+</body>
+</html>

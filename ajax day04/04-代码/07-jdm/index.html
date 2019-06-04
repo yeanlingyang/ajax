@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- 在 sublime 中, meta:vp + tab 生成 -->
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>京东商城</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+
+
+  <!-- 整体部分 -->
+  <div class="jd_container">
+    <!-- 京东头部 -->
+    <div class="jd_header">
+      <!-- bfc实现左右固定, 中间自适应, 先左右浮动 -->
+      <div class="logo">
+        <i class="jd_sprite"></i>
+      </div>
+      <div class="login">
+        <a href="#">登录</a>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="黑马前端xx期">
+        <i class="jd_sprite"></i>
+      </div>
+    </div>
+
+    <!-- 京东轮播 -->
+    <div class="jd_banner">
+      <img src="images/banner01.jpg" alt="">
+    </div>
+
+    <!-- 京东导航 -->
+    <div class="jd_nav">
+      <ul class="clearfix">
+        <!-- 挖个坑 -->
+      </ul>
+    </div>
+
+    <!-- 京东底部 -->
+    <div class="jd_footer">
+      <ul>
+        <li><a href="#"><img src="images/footer01.png" alt=""></a></li>
+        <li><a href="#"><img src="images/footer02.png" alt=""></a></li>
+        <li><a href="#"><img src="images/footer03.png" alt=""></a></li>
+        <li><a href="#"><img src="images/footer04.png" alt=""></a></li>
+        <li><a href="#"><img src="images/footer05.png" alt=""></a></li>
+      </ul>
+    </div>
+  </div>
+
+<!-- 
+  1. 引包
+  2. 准备模板
+  3. 准备数据
+  4. 将数据和模板结合, 生成 htmlStr
+  5. 根据htmlStr, 渲染盒子
+  6. 修改模板, 让数据展示
+ -->
+<script type="text/html" id="tpl">
+  {{ each list v i }}
+    <!-- v 就是每一个对象 -->
+    <li>
+      <a href="{{ v.url }}">
+        <img src="{{ v.src }}" alt="">
+        <p>{{ v.text }}</p>
+      </a>
+    </li>
+  {{ /each }}
+</script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/template-web.js"></script>
+<script>
+
+  // 一进入页面, 就要发送ajax请求, 获取数据
+  // 通过数据, 结合模板引擎渲染
+  $.ajax({
+    url: 'data.php',
+    dataType: 'json',
+    success: function(info) {
+      console.log(info);
+      // template(模板id, 数据对象);
+      // 模板会将 传进去的对象的所有属性, 作为模板中的变量
+      // 注意: 如果后台返回的是数组, 此时, 需要将数组包装到对象中, 再传给模板
+      var obj = {
+        list: info
+      };
+      var htmlStr = template('tpl', obj);
+      $('.jd_nav ul').html(htmlStr);
+    }
+  })
+
+</script>
+
+
+
+</body>
+
+</html>

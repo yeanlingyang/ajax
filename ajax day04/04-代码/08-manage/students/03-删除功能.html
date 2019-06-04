@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>学生管理系统</title>
+  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
+  <style>
+    .navbar-inverse {
+      border-radius: 0;
+    }
+    .panel-body .table th,
+    .panel-body .table td {
+      text-align: center;
+      /* 表格的垂直居中 */
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 
+  导航条
+  1. 将container-fluid (width:100%)  => container 响应式版心
+  2. 删除多余的结构
+  3. navbar-inverse 设置背景色
+-->
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <!-- 左侧的大标题 -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">41期学生管理系统</a>
+      </div>
+
+      <!-- 右侧的说明 -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Copyright © 2019</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 
+    pull-left   float: left;
+    pull-right  float: right;
+    btn 基础类
+    btn-primary 蓝色 btn-success 绿色 btn-danger 红色 btn-default 白色
+  -->
+
+  <div class="container">
+    <!-- 面板组件 -->
+    <div class="panel panel-default">
+      <!-- 面板头部 -->
+      <div class="panel-heading clearfix">
+        <h4 class="pull-left">学生基本信息管理</h4>
+        <button class="pull-right btn btn-primary">添加学生信息</button>
+      </div>
+      <!-- 面板身体 -->
+      <div class="panel-body">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <!-- ctrl + shift + => 选中一个词 -->
+              <th width="5%">序号</th>
+              <th width="10%">姓名</th>
+              <th width="10%">性别</th>
+              <th width="15%">所属学院</th>
+              <th width="30%">个人简介</th>
+              <th width="15%">录入时间</th>
+              <th width="15%">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 挖个坑 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 外面的盒子是蒙层, 内层才是模态框 -->
+  <!--  modal-lg 大  modal-sm 小  不加, 就是中等 -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <!-- 头部 -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">删除学生信息</h4>
+        </div>
+
+        <!-- 中间 -->
+        <div class="modal-body">
+          <p class="text-danger">你是否要确定删除该学生的信息？</p>
+        </div>
+
+        <!-- 底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="delete">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- bootstrap 依赖于 jquery, 需要先引入jquery -->
+  <script src="./lib/jquery/jquery-1.12.4.js"></script>
+  <script src="./lib/bootstrap/js/bootstrap.js"></script>
+  <script src="./lib/art-template/template-web.js"></script>
+
+  <script type="text/html" id="tpl">
+    {{ each list v i }}
+      <tr>
+        <td>{{ i + 1 }} </td>
+        <td>{{ v.name }}</td>
+        <td>{{ v.sex }}</td>
+        <td>{{ v.academy }}</td>
+        <td>{{ v.introduce }}</td>
+        <td>{{ v.createTime }}</td>
+        <td>
+          <button class="btn btn-success">修改</button>
+          <!-- 约定的规范, 为了防止和普通的html属性冲突, 一般会在自定义属性前, 加上 data- 前缀 -->
+          <button class="btn btn-danger btn_delete" data-id='{{ v.id }}'>删除</button>
+        </td>
+      </tr>
+    {{ /each }}
+  </script>
+  <script>
+    /* 
+      模板引擎的使用:
+      1. 引包
+      2. 准备模板
+      3. 准备数据
+      4. 模板 和 数据相结合得到 htmlStr
+      5. 根据 htmlStr 渲染盒子
+      6. 修改模板, 展示数据
+    */
+
+    // 大思路:
+    // 1. 一进入页面, 就发送ajax请求, 获取用户数据
+    // 2. 结合模板引擎, 进行渲染
+    render();
+    function render() {
+      $.ajax({
+        type: 'get',
+        url: '../api/findUsers.php',
+        dataType: 'json',
+        success: function (info) {
+          console.log(info);
+          // template(模板id, 数据对象)
+          // 在模板中, 可以使用传进来对象的所有属性
+          var htmlStr = template('tpl', info);
+          $('tbody').html(htmlStr);
+        }
+      });
+    }
+
+
+    var currentId;
+    // 如果是动态渲染的结构, 添加事件, 需要通过事件委托
+    // 删除按钮是动态渲染的, 一开始页面中没有
+    // 1. 点击删除按钮
+    // 2. 发送ajax请求删除数据
+    $('tbody').on('click', '.btn_delete', function () {
+
+      // 显示模态框 modal('show') 显示  modal('hide') 隐藏
+      $('#deleteModal').modal('show');
+
+      // 获取删除的用户的id  getAttribute  attr
+      currentId = $(this).attr('data-id');
+    });
+    $('#delete').click(function() {
+      // 发送ajax请求, 删除数据了
+      $.ajax({
+        type: 'post',
+        url: '../api/removeUser.php',
+        data: {
+          id: currentId
+        },
+        dataType: 'json',
+        success: function(info) {
+          console.log(info);
+          if (info.status === 'ok') {
+            // 关闭模态框
+            $('#deleteModal').modal('hide');
+            // 重新渲染表格
+            render();
+          }
+        }
+      })
+    });
+
+
+  </script>
+
+</body>
+
+</html>

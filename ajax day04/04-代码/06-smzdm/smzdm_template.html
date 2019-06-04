@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      .item {
+        float: left;
+        width: 320px;
+        border: 1px solid #0094ff;
+        overflow: hidden;
+        margin: 10px;
+        padding: 5px;
+      }
+
+      .item .title {
+        display: block;
+        width: 100%;
+        position: relative;
+      }
+
+      .title img {
+        display: block;
+        height: 180px;
+
+        width: 100%;
+      }
+
+      .title span {
+        position: absolute;
+        right: 20px;
+        bottom: 0px;
+        width: 50px;
+        text-align: center;
+        background-color: lightgray;
+        color: gray;
+        font-size: 13px;
+        border-radius: 5px 5px 0 0;
+      }
+
+      .content {
+        height: 100px;
+        padding: 10px;
+        overflow: hidden;
+      }
+
+      .content a {
+        text-decoration: none;
+        color: black;
+        font-family: '微软雅黑';
+        font-size: 16px;
+      }
+
+      .content p {
+        color: gray;
+        font-size: 13px;
+        font-family: '微软雅黑';
+        margin-bottom: 0;
+      }
+
+      .f_l {
+        float: left;
+      }
+
+      .f_r {
+        float: right;
+      }
+
+      .clearfix::before,
+      .clearfix::after {
+        content: '';
+        display: block;
+        line-height: 0;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+
+      .info {
+        line-height: 25px;
+      }
+
+      .info img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+
+      .info a {
+        color: gray;
+        text-decoration: none;
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="number" id="num" />
+    <button id="btn">获取数据</button>
+
+    <div class="items">
+      <!--div作为容器-->
+      <div class="item clearfix">
+        <a href="#" class="title">
+          <img src="imgs/novel01.jpg" alt="" />
+          <span>13:00</span>
+        </a>
+        <div class="content">
+          <a href="#">给女儿买一套学区房 篇二：二手房之什么值得改（设计篇）</a>
+          <p>
+            一、合理看待二手房二手房的“成色”千姿百态，有拎包入住的精装修，也有水电气都没通的清水房，而更多的是介于这两
+          </p>
+        </div>
+        <div class="info clearfix">
+          <a href="#" class="f_l">
+            <img src="imgs/icon01.jpg" alt="" />烤红薯</a
+          >
+          <a href="#" class="f_r">信息:0</a>
+          <a href="#" class="f_r">❤:0</a>
+          <a href="#" class="f_r">赞:0</a>
+        </div>
+      </div>
+
+      <!--div作为容器-->
+      <div class="item clearfix">
+        <a href="#" class="title">
+          <img src="imgs/novel01.jpg" alt="" />
+          <span>13:00</span>
+        </a>
+        <div class="content">
+          <a href="#">给女儿买一套学区房 篇二：二手房之什么值得改（设计篇）</a>
+          <p>
+            一、合理看待二手房二手房的“成色”千姿百态，有拎包入住的精装修，也有水电气都没通的清水房，而更多的是介于这两
+          </p>
+        </div>
+        <div class="info clearfix">
+          <a href="#" class="f_l">
+            <img src="imgs/icon01.jpg" alt="" />烤红薯</a
+          >
+          <a href="#" class="f_r">信息:0</a>
+          <a href="#" class="f_r">❤:0</a>
+          <a href="#" class="f_r">赞:0</a>
+        </div>
+      </div>
+
+      <!--div作为容器-->
+      <div class="item clearfix">
+        <a href="#" class="title">
+          <img src="imgs/novel01.jpg" alt="" />
+          <span>13:00</span>
+        </a>
+        <div class="content">
+          <a href="#">给女儿买一套学区房 篇二：二手房之什么值得改（设计篇）</a>
+          <p>
+            一、合理看待二手房二手房的“成色”千姿百态，有拎包入住的精装修，也有水电气都没通的清水房，而更多的是介于这两
+          </p>
+        </div>
+        <div class="info clearfix">
+          <a href="#" class="f_l">
+            <img src="imgs/icon01.jpg" alt="" />烤红薯</a
+          >
+          <a href="#" class="f_r">信息:0</a>
+          <a href="#" class="f_r">❤:0</a>
+          <a href="#" class="f_r">赞:0</a>
+        </div>
+      </div>
+
+      <!--div作为容器-->
+      <div class="item clearfix">
+        <a href="#" class="title">
+          <img src="imgs/novel09.jpg" alt="" />
+          <span>13:00</span>
+        </a>
+        <div class="content">
+          <a href="#">分享牙齿矫正经历</a>
+          <p>
+            我刚摘牙套半年多，总的来说对效果还是满意的。多亏决心矫正之前自己功课做得足，没有两眼一抹黑就上，现在我把自己做的功课分享一下哈。1、我为什么要矫正牙齿我牙齿主
+          </p>
+        </div>
+        <div class="info clearfix">
+          <a href="#" class="f_l">
+            <img src="imgs/icon09.jpg" alt="" />小芳草不折腾</a
+          >
+          <a href="#" class="f_r">信息:0</a>
+          <a href="#" class="f_r">❤:0</a>
+          <a href="#" class="f_r">赞:0</a>
+        </div>
+      </div>
+
+      <!--div作为容器-->
+      <div class="item clearfix">
+        <a href="#" class="title">
+          <img src="imgs/novel02.jpg" alt="" />
+          <span>13:00</span>
+        </a>
+        <div class="content">
+          <a href="#">#原创新人#HP 惠普 DeskJet 2132 喷墨一体机 开箱</a>
+          <p>
+            前两天在发现频道爆料的惠普DeskJet
+            2132喷墨一体机今天到货了。搜了下张大妈没有关于这款一体机的开箱照，那我
+          </p>
+        </div>
+        <div class="info clearfix">
+          <a href="#" class="f_l">
+            <img src="imgs/icon02.jpg" alt="" />烤红薯</a
+          >
+          <a href="#" class="f_r">信息:2</a>
+          <a href="#" class="f_r">❤:2</a>
+          <a href="#" class="f_r">赞:2</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+    <style>
+      .navbar {
+        border-radius: 0;
+      }
+
+      .table th,
+      .table td {
+        text-align: center;
+        vertical-align: middle !important;
+      }
+
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* background-color: rgba(0,0,0,.5); */
+        z-index: 9999;
+        /* background-image: url('./images/loading.gif'); */
+        /* background-repeat: no-repeat; */
+        /* 多重背景 */
+        background: url('./images/loading.gif') no-repeat center center,
+          rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+
+      .btn-loading,
+      .btn-loading:hover {
+        background-image: url('./images/loading.gif');
+        background-repeat: no-repeat;
+        background-position: center center;
+        color: transparent !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading"></div>
+    <!-- 导航条 -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">40期学生管理系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Copyright © 2019</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 内容 -->
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h4 class="pull-left">学生基本信息管理</h4>
+          <button class="btn btn-primary pull-right btn-add">
+            添加学生信息
+          </button>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th width="5%">序号</th>
+                <th width="10%">姓名</th>
+                <th width="10%">性别</th>
+                <th width="15%">所属学院</th>
+                <th width="30%">个人简介</th>
+                <th width="15%">录入时间</th>
+                <th width="15%">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 挖个坑 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">删除学生信息</h4>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger">你是否要确定删除该学生的信息？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              取消
+            </button>
+            <button type="button" class="btn btn-primary btn-delete">
+              确定
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">添加学生信息</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="text" name="id" class="hidden" />
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  placeholder="请输入用户名"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="sex"
+                  placeholder="请输入性别"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="academy"
+                  placeholder="请输入所属学院"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  name="introduce"
+                  rows="3"
+                  placeholder="请输入个人介绍"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              取消
+            </button>
+            <button type="button" class="btn btn-primary btn-save">
+              添加
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/html" id="tpl">
+      {{each list v i}}
+      <tr>
+        <td>{{i + 1}}</td>
+        <td>{{v.name}}</td>
+        <td>{{v.sex}}</td>
+        <td>{{v.academy}}</td>
+        <td>{{v.introduce}}</td>
+        <td>{{v.createTime}}</td>
+        <td>
+          <button class="btn btn-success edit" data-id="{{v.id}}">修改</button>
+          <button class="btn btn-danger delete" data-id="{{v.id}}">删除</button>
+        </td>
+      </tr>
+      {{/each}}
+    </script>
+    <script src="lib/jquery/jquery-1.12.4.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/art-template/template-web.js"></script>
+    <script>
+      var render = function() {
+        $.ajax({
+          type: 'get',
+          url: '../api/findUsers.php',
+          dataType: 'json',
+          beforeSend: function() {
+            $('.loading').show()
+          },
+          success: function(info) {
+            var html = template('tpl', info)
+            window.list = info.list
+            // console.log(html)
+            $('tbody').html(html)
+          },
+          complete: function() {
+            $('.loading').hide()
+          }
+        })
+      }
+      render()
+
+      // 删除功能 ， 必须委托事件
+      var id
+      $('tbody').on('click', '.delete', function() {
+        // 获取id
+        // id = $(this).attr('data-id')
+        id = $(this).data('id')
+        // 显示模态框
+        $('#deleteModal').modal('show')
+      })
+      $('.btn-delete').on('click', function() {
+        // 发送ajax
+        $.ajax({
+          type: 'post',
+          url: '../api/removeUser.php',
+          data: {
+            id: id
+          },
+          beforeSend() {
+            if ($('.btn-delete').hasClass('btn-loading')) {
+              return false
+            }
+            $('.btn-delete').addClass('btn-loading')
+          },
+          success: function(info) {
+            console.log(info)
+            if (info.status === 'ok') {
+              // 模态框隐藏
+              $('#deleteModal').modal('hide')
+              // 重新加载页面
+              render()
+            }
+          },
+          complete: function() {
+            $('.btn-delete').removeClass('btn-loading')
+          }
+        })
+      })
+
+      // 添加功能
+      var $editModal = $('#editModal')
+      var $modalTitle = $editModal.find('.modal-title')
+      var $btnSave = $('.btn-save')
+      var $form = $('form')
+      $('.btn-add').on('click', function() {
+        $editModal.modal('show')
+        $modalTitle.text('添加学生信息')
+        $btnSave.text('添加')
+        // 清空内容
+        $form[0].reset()
+      })
+
+      $('tbody').on('click', '.edit', function() {
+        $editModal.modal('show')
+        $modalTitle.text('修改学生信息')
+        $btnSave.text('修改')
+        // 回显数据
+        var id = $(this).data('id')
+        var now
+        for (var i = 0; i < list.length; i++) {
+          if (+list[i].id === id) {
+            now = list[i]
+            break
+          }
+        }
+
+        $('[name=id]').val(now.id)
+        $('[name=name]').val(now.name)
+        $('[name=sex]').val(now.sex)
+        $('[name=academy]').val(now.academy)
+        $('[name=introduce]').val(now.introduce)
+      })
+
+      $btnSave.on('click', function() {
+        var id = $('[name=id]').val()
+        var url = id ? '../api/updateUser.php' : '../api/saveUser.php'
+        $.ajax({
+          type: 'post',
+          url: url,
+          data: $form.serialize(),
+          beforeSend: function() {
+            if ($btnSave.hasClass('btn-loading')) {
+              return false
+            }
+            $btnSave.addClass('btn-loading')
+          },
+          success: function(info) {
+            if (info.status === 'ok') {
+              $editModal.modal('hide')
+              render()
+            }
+          },
+          complete: function() {
+            $btnSave.removeClass('btn-loading')
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
