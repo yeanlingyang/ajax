@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- 
+    假定: 所有的前端代码, 都部署在前端服务器, 部署在 www.front.com 中
+    访问路径: http://www.front.com/ajax05/03-front/01.html
+   -->
+  <button>发送请求</button>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+    
+    // 如果前端和后台部署在不同的服务器上
+    // 自己的前端 www.front.com
+    // 自己的后台 www.back.com   发送ajax, 必然会遇到跨域问题, 受到同源策略的限制, 拿不到数据
+
+    // 我们需要解决这个问题: jsonp  cors     (反向代理)
+
+    $('button').click(function() {
+
+      // 正常发请求
+      $.ajax({
+        type: 'get',
+        url: 'http://www.back.com/ajax05/03-back/01.php',
+        dataType: 'json',
+        success: function( info ) {
+          console.log(info);
+        }
+      })
+
+    });
+  
+  
+  </script>
+  
+  
+</body>
+</html>

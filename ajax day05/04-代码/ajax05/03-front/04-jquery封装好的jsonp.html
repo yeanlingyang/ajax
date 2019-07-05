@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <button>发送请求</button>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+
+    // 面试题: ajax 和 jsonp 有没有关系? 没有任何关系
+    // jquery只是将jsonp的使用, 封装到了 ajax 中, 只是为了方便用户的使用
+
+    // jsonp的原理:
+    // 1. 前端利用动态创建script标签, 来发送请求
+    // 2. 后台返回函数调用, 将数据给前端
+
+    // 点击按钮, 发送正常的请求
+    $('button').click(function() {
+      $.ajax({
+        type: 'get',
+        url: 'http://www.back.com/ajax05/03-back/01.php',
+        dataType: 'jsonp',
+        success: function(info) {
+          console.log(info);
+        }
+      })
+    })
+  
+  </script>
+  
+</body>
+</html>

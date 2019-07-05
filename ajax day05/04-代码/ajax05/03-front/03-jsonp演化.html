@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://www.back.com/ajax05/03-back/index.css">
+</head>
+<body>
+
+<button>发送请求</button>
+
+
+<script>
+  // 前端函数名是写死的
+  function myfn(data) {
+    console.log(data);
+  }
+
+  var btn = document.querySelector('button');
+  btn.onclick = function() {
+    // 点击时, 再发请求, 调用fn
+    var script = document.createElement('script');
+    script.src = 'http://www.back.com/ajax05/03-back/01.php?callback=myfn';
+    document.body.appendChild(script);
+  }
+
+</script>
+
+<!-- pp("hello") -->
+<!-- <script src="http://www.back.com/ajax05/03-back/01.php"></script> -->
+
+
+<!-- 
+  jsonp的原理:
+    1. 利用 script 标签发送请求, script标签不受同源策略限制
+    2. 后台输出一个函数调用, 将来在前端, 会把内容当成 js 来执行, 调用函数, 就把参数传过来了 
+
+  jsonp 和 ajax 没有任何关系, jsonp只是利用script标签, 来发送了请求而已!!
+  jsonp 需要前端后端配合的
+ -->
+  
+</body>
+</html>

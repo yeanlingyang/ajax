@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    table {
+      border: 1px solid #000;
+      width: 600px;
+      margin-top: 10px;
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px solid #000;
+      height: 40px;
+      line-height: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="city">
+  <button id="btn">获取天气</button>
+  <table>
+    <!-- 挖个巨坑 -->
+  </table>
+
+<script src="./jquery-1.12.4.js"></script>
+<script src="./template-web.js"></script>
+<script type="text/html" id="tpl">
+  <tr>
+    <td>城市</td>
+    <td>{{ city }}</td>
+  </tr>
+  <tr>
+    <td>日期</td>
+    <td>{{ date }}</td>
+  </tr>
+  <tr>
+    <td>天气</td>
+    <td>{{ weather }}</td>
+  </tr>
+  <tr>
+    <td>图片</td>
+    <td>
+      <img width="50" src="./img/{{ img }}.png" alt="">
+    </td>
+  </tr>
+  <tr>
+    <td>气温</td>
+    <td>{{ temp }}</td>
+  </tr>
+  <tr>
+    <td>最高气温</td>
+    <td>{{ temphigh }}</td>
+  </tr>
+  <tr>
+    <td>最低气温</td>
+    <td>{{ templow }}</td>
+  </tr>
+  <tr>
+    <td>湿度</td>
+    <td>{{ humidity }}</td>
+  </tr>
+  <tr>
+    <td>更新时间</td>
+    <td>{{ updatetime }}</td>
+  </tr>
+</script>
+
+<script>
+  $('#btn').click(function() {
+
+    $.ajax({
+      type: 'get',
+      url: 'https://api.jisuapi.com/weather/query',
+      data: {
+        city: $('#city').val(),
+        appkey: '3fa977031a30ffe1',    // 通过这个appkey可以用于计费
+      },
+      // 只要后台支持 jsonp, 只需要将dataType改成 jsonp就可以拿到数据了
+      dataType: 'jsonp',
+      success: function(info) {
+        console.log(info);
+        // 将模板和数据相结合
+        var htmlStr = template('tpl', info.result);
+        $('table').html(htmlStr);
+      }
+    })
+
+  })
+
+
+
+</script>
+
+
+</body>
+
+</html>

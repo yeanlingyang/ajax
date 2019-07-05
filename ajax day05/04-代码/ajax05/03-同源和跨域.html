@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- 
+    所有的浏览器, 都有一个同源策略
+    这个策略规定: 不同源的网站之间 不能互相 发送 ajax请求获取数据
+
+    
+    同源: 三个相同, 三个都相同才是同源的网站
+      1. 域名相同  www.jd.com   www.taobao.com
+      2. 协议相同  http         https
+      3. 端口相同  80   81   82   8080   4000
+
+      http://www.jd.com:80
+
+      http://www.taobao.com:80
+
+
+    同源策略的目的: 为了安全性考虑, 不允许不同源网站随意获取数据  (没有问题的)
+
+    但是实际开发过程中, 可能会出现一种情况, 前端代码 和 后端代码 部署在不同的服务器上的
+
+    不同源的网站互相之间获取数据, 都是跨域, 跨域是会受到同源策略的限制的, ajax请求是拿不到数据的!!!
+
+    但是这个问题, 需要解决!!!!   JSONP  /  cors     (后面还有反向代理)
+
+   -->
+  
+</body>
+</html>
